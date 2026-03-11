@@ -1,0 +1,520 @@
+watch_stylesheet: true
+watch_config: true
+debug: false
+
+bars:
+  primary-bar:
+    enabled: true
+    screens: ["**"]
+    class_name: "yasb-bar"
+    alignment:
+      position: "top"
+      align: "center"
+    animation:
+      enabled: true
+      duration: 1000
+    blur_effect:
+      enabled: false 
+      acrylic: true 
+      dark_mode: true
+      round_corners: false
+      border_color: None
+    window_flags:
+      windows_app_bar: true
+    dimensions:
+      width: "100%"
+      height: 32
+    padding:
+      top: 1
+      left: 0
+      bottom: 0
+      right: 0
+    widgets:
+      left: [
+        "home",              # Your 'Start' equivalent
+        "komorebi_workspaces", # Critical for tiling management
+        "taskbar"            # This is your new engine room
+      ]
+      center: [
+        "media",             # Moved to center-left for prominence
+        "clock"              # The anchor
+      ]
+      right: [
+        "traffic",           # Just a small icon, don't waste space with text
+        "volume",            # Essential
+        "microphone",        # You said you liked this—keep it for privacy/calls
+        "power_menu"         # The exit strategy
+      ]
+
+widgets:
+  # task_view:
+  #   type: "yasb.custom.CustomWidget"
+  #   options:
+  #     label: "<span>\ue62a</span>"
+  #     label_alt: "<span>\ue62a</span>"
+  #     class_name: "task-view-widget"
+  #     callbacks:
+  #       on_left: "exec explorer.exe shell:::{3080F90E-D7AD-11D9-BD98-0000947B0257}"
+  #       on_middle: "do_nothing"
+  #       on_right: "do_nothing"
+
+  home:
+    type: "yasb.home.HomeWidget"
+    options:
+      label: "<span>\udb81\udf17</span>"
+      container_shadow:
+        enabled: true
+        offset: [-1, 2]
+        radius: 1
+        color: "#ff003c"
+      menu_list:
+      - { title: "User Home", path: "~" }
+      - { title: "Download", path: "~\\Downloads" }
+      - { title: "Documents", path: "~\\Documents" }
+      - { title: "Pictures", path: "~\\Pictures" }
+      system_menu: true
+      power_menu: true
+      blur: true
+      border_color: "None"
+      round_corners_type: "small"
+      container_padding:
+        top: 0
+        left: 12
+        bottom: 0
+        right: 12
+
+  komorebi_workspaces:
+    type: "komorebi.workspaces.WorkspaceWidget"
+    options:
+      container_shadow:
+        enabled: true
+        offset: [-1, 2]
+        radius: 1
+        color: "#ff003c"
+      label_shadow:
+        enabled: true
+        offset: [0, 0]
+        radius: 4
+        color: "#feed00"
+      label_offline: "\u23fc Offline"
+      label_workspace_btn: "\udb80\uddc6"
+      label_workspace_active_btn: "\ue285  \ue200"
+      label_workspace_populated_btn: "\uf00d"
+      label_default_name: "{index}"
+      label_zero_index: true
+      hide_empty_workspaces: false
+      hide_if_offline: false
+      animation: true
+      enable_scroll_switching: true
+      container_padding:
+        top: 0
+        left: 8
+        bottom: 0
+        right: 8
+  komorebi_active_layout:
+    type: "komorebi.active_layout.ActiveLayoutWidget"
+    options:
+      hide_if_offline: true
+      label: "{icon}"
+      layouts:
+        [
+          "bsp",
+          "columns",
+          "rows",
+          "grid",
+          "vertical_stack",
+          "horizontal_stack",
+          "ultrawide_vertical_stack",
+          "right_main_vertical_stack",
+        ]
+      layout_icons:
+        bsp: "󰙀"
+        columns: "󰙁"
+        rows: "󰙂"
+        grid: "󰙃"
+        vertical_stack: "󰙄"
+        horizontal_stack: "󰙅"
+        ultrawide_vertical_stack: "󰙆"
+        right_main_vertical_stack: "󰙇"
+        monocle: "󰙈"
+        maximized: "󰙈"
+        floating: "󰙉"
+        paused: "󰏤"
+      callbacks:
+        on_left: "next_layout"
+        on_middle: "toggle_monocle"
+        on_right: "prev_layout"
+
+  taskbar:
+    type: "yasb.taskbar.TaskbarWidget"
+    options:
+      animation:
+        enabled: true
+      icon_size: 14
+      show_only_visible: false
+      tooltip: true
+      monitor_exclusive: true
+      hide_empty: true
+      label_shadow:
+        enabled: true
+        offset: [-1, 2]
+        radius: 3
+        color: "#00ffd2"
+      container_shadow:
+        enabled: true
+        offset: [-1, 2]
+        radius: 1
+        color: "#ff003c"
+      preview:
+        enabled: true
+        width: 240
+        delay: 400
+        padding: 8
+        margin: 8
+      ignore_apps:
+        processes: []
+        titles: []
+        classes: []
+      container_padding:
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+      callbacks:
+        on_left: "toggle_window"
+        on_middle: "do_nothing"
+        on_right: "context_menu"
+  media:
+    type: "yasb.media.MediaWidget"
+    options:
+      label: "{artist} - {title}"
+      label_alt: "{title}"
+      label_shadow:
+        enabled: true
+        offset: [-1, 2]
+        radius: 2
+        color: "#00ffd2"
+      container_shadow:
+        enabled: true
+        offset: [-1, 2]
+        radius: 1
+        color: "#ff003c"
+      max_field_size:
+        label: 32
+        label_alt: 32
+      controls_only: false
+      controls_left: true
+      hide_empty: true
+      thumbnail_alpha: 150
+      thumbnail_padding: 8
+      thumbnail_corner_radius: 0
+      icons:
+        prev_track: "«"     # Double left-pointing angle bracket
+        next_track: "»"     # Double right-pointing angle bracket
+        play: "▶"           # Black right-pointing triangle
+        pause: "Ⅱ"          # Roman numeral two (perfectly vertical bars)
+      media_menu_icons:
+        prev_track: "«"
+        next_track: "»"
+        play: "▶"
+        pause: "Ⅱ"
+        mute: "✕"           # Multiplication X for 'Muted'
+        unmute: "🔊"         # Or just "!" for a minimalist alert
+      media_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "system"
+        alignment: "center"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+        thumbnail_corner_radius: 8
+        thumbnail_size: 120
+        max_title_size: 60
+        max_artist_size: 20
+        show_source: true
+        show_volume_slider: true
+      container_padding:
+        top: 8
+        left: 8
+        bottom: 8
+        right: 8
+      scrolling_label:
+        enabled: true
+        always_scroll: false
+        update_interval_ms: 16 
+        style: "left" 
+        separator: "    |    "
+        label_padding: 1
+      callbacks:
+        on_left: "toggle_media_menu"
+        on_middle: "focus_media"
+        on_right: "toggle_label"
+
+  clock:
+    type: "yasb.clock.ClockWidget"
+    options:
+      # Format: WED | 11.03.26 | 11:03
+      label: "<span>[ ❯ ]</span> {%a %d %b %H:%M}"
+      label_alt: "{%A %d %B %Y %H:%M:%S}"
+      label_shadow:
+        enabled: true
+        offset: [0, 0]
+        radius: 4
+        color: "#00ffd2" # Subtle cyan glow
+      calendar:
+        blur: false
+        round_corners: false
+        border_color: "#ff003c" # Red tactical border for the calendar
+        direction: "down"
+        distance: 8
+        holiday_color: "#ff003c"
+        show_week_numbers: true
+      timezones: ["Asia/Tokyo"] # Stay consistent with the internal name
+      callbacks:
+        on_left: "toggle_calendar"
+        on_right: "toggle_label"
+      container_padding:
+        top: 0
+        left: 8
+        bottom: 0
+        right: 0
+
+  cpu:
+      type: "yasb.cpu.CpuWidget"
+      options:
+        label: "<span>\ueea1</span> {info[percent][total]}%"
+        label_alt: "<span>\ueea1</span> {info[histograms][cpu_percent]}"
+        update_interval: 1000
+        histogram_icons:
+          - "\u2581"  # 0%
+          - "\u2581"  # 10%
+          - "\u2582"  # 20%
+          - "\u2583"  # 30%
+          - "\u2584"  # 40%
+          - "\u2585"  # 50%
+          - "\u2586"  # 60%
+          - "\u2587"  # 70%
+          - "\u2588"  # 80%+
+        histogram_num_columns: 8
+        callbacks:
+          on_left: "do_nothing"
+          on_middle: "exec cmd /c Taskmgr"
+          on_right: "toggle_label"
+        container_padding:
+          top: 0
+          left: 0
+          bottom: 0
+          right: 0
+        label_shadow:
+          enabled: false
+          color: "black"
+          radius: 5
+          offset: [ 0, 0 ]
+
+  gpu:
+      type: "yasb.gpu.GpuWidget"
+      options:
+        label: "<span>\uf4bc</span> {info[temp]}°C"
+        label_alt: "<span>\uf4bc</span> {info[temp]}°C | {info[mem_used]} / {info[mem_total]}"
+        update_interval: 2000
+        gpu_thresholds:
+          low: 25
+          medium: 50
+          high: 90
+        histogram_icons:
+          - "\u2581"  # 0%
+          - "\u2581"  # 10%
+          - "\u2582"  # 20%
+          - "\u2583"  # 30%
+          - "\u2584"  # 40%
+          - "\u2585"  # 50%
+          - "\u2586"  # 60%
+          - "\u2587"  # 70%
+          - "\u2588"  # 80%+
+        histogram_num_columns: 8
+        callbacks:
+          on_left: "do_nothing"
+          on_middle: "exec cmd /c Taskmgr"
+          on_right: "toggle_label"
+
+  memory:
+      type: "yasb.memory.MemoryWidget"
+      options:
+        label: "<span>\uefc5</span> {virtual_mem_used} / {virtual_mem_total}"
+        label_alt: "<span>\uf4bc</span> VIRT: {virtual_mem_percent}% SWAP: {swap_mem_percent}%"
+        update_interval: 5000
+        callbacks:
+          on_left: "do_nothing"
+          on_middle: "exec cmd /c Taskmgr"
+          on_right: "toggle_label"
+        memory_thresholds:
+          low: 25
+          medium: 50
+          high: 90
+        histogram_icons:
+          - "\u2581"  # 0%
+          - "\u2581"  # 10%
+          - "\u2582"  # 20%
+          - "\u2583"  # 30%
+          - "\u2584"  # 40%
+          - "\u2585"  # 50%
+          - "\u2586"  # 60%
+          - "\u2587"  # 70%
+          - "\u2588"  # 80%+
+        label_shadow:
+          enabled: true
+          color: "black"
+          radius: 3
+          offset: [ 1, 1 ]
+
+  traffic:
+      type: "yasb.traffic.TrafficWidget"
+      options:
+        label: "<span class='download'>\uea9a {download_speed}</span><span class='upload'>{upload_speed} \ueaa1</span>"
+        label_alt: "<span class='download'>\uea9a {download_speed}</span><span class='upload'>{upload_speed} \ueaa1</span>"
+        update_interval: 1000
+        hide_if_offline: true
+        speed_unit: "bytes"
+        max_label_length_align: "center"
+        menu:
+          blur: true
+          round_corners: true
+          round_corners_type: "normal"
+          border_color: "system"
+          alignment: "center"
+          direction: "down"
+        callbacks:
+          on_left: "toggle_menu"
+          on_middle: "exec cmd.exe /c start ms-settings:network-status"
+          on_right: "do_nothing"
+        label_shadow:
+          enabled: false
+          color: "black"
+          radius: 3
+          offset: [ 1, 1 ]
+
+  volume:
+    type: "yasb.volume.VolumeWidget"
+    options:
+      label: "<span>{icon}</span> {level}"
+      label_alt: "{volume}"
+      label_shadow:
+        enabled: true
+        offset: [-1, 2]
+        radius: 1
+        color: "#ff003c"
+      tooltip: true
+      volume_icons:
+        - "---"    # Mute
+        - "L01"    # 1-5% (Level 1)
+        - "L02"    # 6-20% (Level 2)
+        - "L03"    # 21-40% (Level 3)
+        - "MAX"    # 41%+ (The 'Don't Blow Your Ears Out' warning)
+      callbacks:
+        on_left: "toggle_volume_menu"
+        on_right: "toggle_mute"
+      audio_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "small"
+        border_color: "None"
+        alignment: "center"
+        direction: "down"
+        distance: 6
+        show_apps: true
+        show_apps_expanded: true
+      container_padding:
+        top: 0
+        left: 4
+        bottom: 0
+        right: 8
+
+  microphone:
+      type: "yasb.microphone.MicrophoneWidget"
+      options:
+        label: "<span>{icon}</span> {level}"
+        label_alt: "<span>{icon}</span>"
+        mute_text: "Mute"
+        icons:
+          normal: "⫸" 
+          muted: "Ø"  
+        mic_menu:
+          blur: true
+          round_corners: true
+          round_corners_type: "normal"
+          border_color: "system"
+          alignment: "right"
+          direction: "down"
+        callbacks:
+          on_left: "toggle_mic_menu"
+          on_middle: "exec cmd.exe /c start ms-settings:sound"
+          on_right: "toggle_mute"
+        label_shadow:
+          enabled: true
+          color: "black"
+          radius: 3
+          offset: [ 1, 1 ]
+
+  disk:
+      type: "yasb.disk.DiskWidget"
+      options:
+        label: "<span>\uf473</span> Disks"
+        label_alt: "<span>\uf473</span> {volume_label} {space[used][gb]} / {space[total][gb]}"
+        volume_label: "C"
+        decimal_display: 1
+        update_interval: 60
+        group_label:
+          volume_labels: ["C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"] 
+          show_label_name: true
+          blur: true
+          round_corners: true
+          round_corners_type: "normal"
+          border_color: "system"
+          alignment: "center"
+          direction: "down"
+        callbacks:
+          on_left: "toggle_group"
+          on_middle: "do_nothing"
+          on_right: "toggle_label"
+        disk_thresholds:
+          low: 25
+          medium: 50
+          high: 90
+
+  apps:
+      type: "yasb.applications.ApplicationsWidget"
+      options:
+        label: "{data}"
+        app_list:
+          # - { icon: "\uf0a2", launch: "notification_center" }
+          # - { icon: "\ueb51", launch: "quick_settings" }
+          - { icon: "\uf46a", launch: "cmd /c start ms-settings:windowsupdate" }
+          # - { icon: "\uf422", launch: "search" }
+          - { icon: "\ueb03", launch: "cmd /c Taskmgr", name: "Task Manager" }
+          - { icon: "\uf489", launch: "wt", name: "Windows Terminal" }
+          - { icon: "\udb82\ude1e", launch: "cmd /c code", name: "VS Code" }
+          - { icon: "\uf1b6", launch: "C:/Program Files (x86)/Steam/Steam.exe", name: "Steam" }
+        container_padding:
+          top: 0
+          left: 8
+          bottom: 0
+          right: 8
+
+  power_menu:
+    type: "yasb.power_menu.PowerMenuWidget"
+    options:
+      # Using a sharp geometric symbol or 'EXIT' for the bar label
+      label: "⏻" 
+      uptime: true
+      blur: false
+      blur_background: true
+      animation_duration: 200  # Snappier exit for a high-performance feel
+      button_row: 3
+      buttons:
+        shutdown: ["⏼", "TERMINATE"]   # More aggressive than 'Shut Down'
+        restart:  ["⟳", "REBOOT"]      # Classic terminal terminology
+        sleep:    ["Zzz", "STASIS"]      # 'Sleep' is for people; 'Stasis' is for rigs
+        cancel:   ["", "ABORT"]       # Matches your 'Mute' icon logic
+
