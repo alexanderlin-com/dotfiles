@@ -37,12 +37,12 @@ bars:
           "home",
           "komorebi_workspaces",
           "komorebi_active_layout", 
+          "media",
           "taskbar"
           
         ]
       center: 
         [
-          "media",
           "clock"
         ]
       right: 
@@ -288,24 +288,24 @@ widgets:
     # Keep the detailed breakdown for the 'alt' view
       label_alt: "<span>\uf4bc</span> {virtual_mem_percent}% | SWP: {swap_mem_percent}%"
       update_interval: 5000
-        callbacks:
-          on_left: "do_nothing"
-          on_middle: "exec cmd /c Taskmgr"
-          on_right: "toggle_label"
-        memory_thresholds:
-          low: 25
-          medium: 50
-          high: 90
-        histogram_icons:
-          - "\u2581"  # 0%
-          - "\u2581"  # 10%
-          - "\u2582"  # 20%
-          - "\u2583"  # 30%
-          - "\u2584"  # 40%
-          - "\u2585"  # 50%
-          - "\u2586"  # 60%
-          - "\u2587"  # 70%
-          - "\u2588"  # 80%+
+      callbacks:
+        on_left: "do_nothing"
+        on_middle: "exec cmd /c Taskmgr"
+        on_right: "toggle_label"
+      memory_thresholds:
+        low: 25
+        medium: 50
+        high: 90
+      histogram_icons:
+        - "\u2581"  # 0%
+        - "\u2581"  # 10%
+        - "\u2582"  # 20%
+        - "\u2583"  # 30%
+        - "\u2584"  # 40%
+        - "\u2585"  # 50%
+        - "\u2586"  # 60%
+        - "\u2587"  # 70%
+        - "\u2588"  # 80%+
       label_shadow:
         enabled: true
         color: "black"
