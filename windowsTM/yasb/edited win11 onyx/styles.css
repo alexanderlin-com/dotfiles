@@ -718,21 +718,26 @@
    Traffic Widget
    ---------------------------------------------------------------------------- */
 .traffic-widget {
-    min-width: 130px; /* Bumped to 160 to handle 'MB/s' peaks */
-    max-width: 130px;
+    min-width: 160px; /* Bumped slightly to prevent clipping during MB/s peaks */
+    max-width: 180px;
     qproperty-alignment: 'AlignCenter';
     background-color: var(--color-bg-secondary);
     border-radius: 12px;
-    margin-right: 6px;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 0 8px;
+}
+
+.traffic-widget .sep {
+    color: var(--color-text-tertiary);
+    padding: 0 4px;
+    opacity: 0.5;
 }
 
 .traffic-widget .download, 
 .traffic-widget .upload {
-    font-family: var(--font-mono); /* CRITICAL: Fixed-width digits */
-    font-size: 10px;               /* Slightly smaller to fit both speeds */
-    min-width: 0px;              /* Give each half a dedicated slot */
+    /* Set a small min-width on the spans if YASB allows, 
+       otherwise just rely on the parent container. */
+    font-family: var(--font-mono); 
+    font-size: 10px; /* Slightly smaller for density */
 }
 
 .traffic-menu {

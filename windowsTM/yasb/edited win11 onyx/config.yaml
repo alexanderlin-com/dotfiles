@@ -315,12 +315,11 @@ widgets:
   traffic:
       type: "yasb.traffic.TrafficWidget"
       options:
-        # Use a fixed arrow prefix and matched spacing
-        label: "<span class='download'>↓ {download_speed}</span> <span class='upload'>{upload_speed} ↑</span>"
-        label_alt: "<span>{interface}</span> | {ip_address}"
-        update_interval: 1500 # 1s is too twitchy; 1.5s is smoother
+        # Use a separator to keep visual balance
+        label: "<span class='download'>▼ {download_speed}</span> <span class='sep'>|</span> <span class='upload'>{upload_speed} ▲</span>"
+        update_interval: 1000
         hide_if_offline: true
-        speed_unit: "bytes" # Keep it on auto-bytes for readability
+        # Ensures the width is calculated from the center out
         max_label_length_align: "center"
         menu:
           blur: true
